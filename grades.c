@@ -7,26 +7,29 @@ int main(int argc, char* argv)
     if (argc == 1) //If you got 10 grades to eval
     {
         // Get grades:
-        int grades[10], sum;
-        float av, raw;
+        int grades[10], sum = 0;
+        float raw, jump, av;
         for (int i = 0; i < 10; i++)
         {
             printf("Grade #%i: ", i + 1);
             int grade;
             scanf("%d", &grade);
             grades[i] = grade;
+            sum += grade;
         }
-        for (int i = 0; i < 10; i++)
-        {
-            sum += grades[i];
-        }
-        printf("SUM: %i", sum);
-        av = sum / 10;
-        raw = sum / 44 * 40;
-        printf("\nInsgesamt hast du %i Punkte erziehlt.\n", sum);
+        printf("Insgesamt hast du %i Punkte erzielt.\n", sum);
+
         printf("Deine Noten sehen so aus:\n");
         outputBars(grades);
-        printf("Das enspricht %f Rohpunkten fuer dein Abitur.\n", raw);
+
+        raw = (float) sum / 44 * 40;
+        int clean_raw = (int)(raw + 0.5);
+        printf("Das enspricht %i Rohpunkten fuer dein Abitur, ", clean_raw);
+        jump = (float) clean_raw / 17;
+        int clean_jump = (int)(jump + 0.5);
+        printf("womit du %i Kommaspruenge gemacht hast.\n", clean_jump);
+
+        av = (float) sum / 10;
         printf("Dein Notendurchschnitt betraegt: %f Punkte\n", av);
         return 0;
     }
